@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: polkadot_health_check
   author: Richard Mah (@shinyfoil)
   description: Role to install and configure Gruntwork health check on Polkadot nodes
   company:
