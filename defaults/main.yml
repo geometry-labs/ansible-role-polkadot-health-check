@@ -1,2 +1,4 @@
 ---
 # defaults file for polkadot-health-check
+
+skip_health_check: false
