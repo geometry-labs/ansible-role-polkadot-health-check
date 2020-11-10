@@ -2,7 +2,7 @@
 
 {% if skip_health_check %}exit 0{% endif %}
 
-QUERY_RESULT=$(curl -sS -H "Content-Type: application/json" -d '{"id": 1, "jsonrpc": "2.0", "method": "system_health", "params": []}' http://localhost:9933)
+QUERY_RESULT=$(curl -sS -H "Content-Type: application/json" -d '{"id": 1, "jsonrpc": "2.0", "method": "system_health", "params": []}' http://localhost:{{ api_rpc_port }})
 
 IS_SYNCING=$(echo $QUERY_RESULT | jq '.result.isSyncing')
 PEERS=$(echo $QUERY_RESULT | jq '.result.peers')

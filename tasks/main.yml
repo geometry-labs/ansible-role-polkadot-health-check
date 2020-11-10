@@ -1,5 +1,4 @@
 ---
-# tasks file for polkadot-health-check
 - name: create gruntwork group
   group:
     name: gruntwork
@@ -17,11 +16,17 @@
     state: directory
     mode: '0755'
 
+- name: check if health check agent binary is present
+  stat:
+    path: /usr/local/bin/health_check_agent
+  register: health_binary_present
+
 - name: download health check agent
   get_url:
     url: 'https://github.com/gruntwork-io/health-checker/releases/download/v0.0.5/health-checker_linux_amd64'
     dest: /root/health_check/health_check_agent
     mode: '0700'
+  when: not health_binary_present.stat.exists
 
 - name: copy health check agent binary
   shell: |
@@ -32,16 +37,17 @@
   args:
     executable: /bin/bash
   changed_when: False
+  when: not health_binary_present.stat.exists
 
 - name: check if health check script exists
   stat:
-    path: /usr/local/bin/health_check_script.sh
+    path: "/usr/local/bin/health_check_script_{{ chain }}.sh"
   register: health_script_exists
 
 - name: create health check script
   template:
     src: health_check_script.sh.j2
-    dest: /usr/local/bin/health_check_script.sh
+    dest: "/usr/local/bin/health_check_script_{{ chain }}.sh"
     owner: gruntwork
     group: gruntwork
     mode: '0700'
@@ -50,14 +56,14 @@
 - name: create health check agent config
   template:
     src: healthagent.service.j2
-    dest: /etc/systemd/system/healthagent.service
+    dest: "/etc/systemd/system/healthagent_{{ chain }}.service"
     owner: root
     group: root
     mode: 0600
 
 - name: start health check agent service
   systemd:
-    name: healthagent
+    name: "healthagent_{{ chain }}"
     state: restarted
     daemon_reload: yes
     enabled: yes

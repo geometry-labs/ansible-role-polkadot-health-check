@@ -5,7 +5,9 @@ Description=Gruntwork Health Check Agent
 User=gruntwork
 Group=gruntwork
 ExecStart=/usr/local/bin/health_check_agent \
-         --script /usr/local/bin/health_check_script.sh
+         --port {{ health_check_port }} \
+         --singleflight \
+         --script /usr/local/bin/health_check_script_{{ chain }}.sh
 
 [Install]
 WantedBy=multi-user.target
