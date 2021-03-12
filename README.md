@@ -43,4 +43,4 @@ Apache 2.0
 Author Information
 ------------------
 
-Maintained by [Richard Mah](https://github.com/shinyfoil) for [Insight Infrastructure](https://github.com/insight-infrastructure)
+Maintained by [Richard Mah](https://github.com/shinyfoil) at [Geometry Labs](https://github.com/geometry-labs)
