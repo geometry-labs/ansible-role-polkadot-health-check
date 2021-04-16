@@ -5,7 +5,7 @@ Description=Gruntwork Health Check Agent
 User=gruntwork
 Group=gruntwork
 ExecStart=/usr/local/bin/health_check_agent \
-         --port {{ phc_health_check_port }} \
+         --listener "0.0.0.0:{{ phc_health_check_port }}" \
          --singleflight \
          --script /usr/local/bin/health_check_script_{{ phc_chain }}.sh
 
