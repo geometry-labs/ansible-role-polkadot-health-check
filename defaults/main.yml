@@ -1,7 +1,7 @@
 ---
 # defaults file for polkadot-health-check
 
-skip_health_check: false
+phc_skip_health_check: false
 phc_api_rpc_port: 9933
 phc_health_check_port: 5500
 phc_chain: "kusama"
