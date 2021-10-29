@@ -1,4 +1,4 @@
-name: Publish to Galaxy
+name: galaxy-publish
 
 on:
   - push
