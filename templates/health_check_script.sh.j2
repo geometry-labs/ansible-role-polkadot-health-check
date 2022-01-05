@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-{% if phc_skip_health_check %}exit 0{% endif %}
+{% if phc_skip_health_check | bool %}exit 0{% endif %}
 
 QUERY_RESULT=$(curl -sS -H "Content-Type: application/json" -d '{"id": 1, "jsonrpc": "2.0", "method": "system_health", "params": []}' http://localhost:{{ phc_api_rpc_port }})
 
